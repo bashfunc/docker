@@ -7,7 +7,7 @@ ERROR="./container-port/data/$CONTAINER/error.txt"
 
 function activePortsOnContainer() {
     echo -e "\[33m$CONTAINER HAS LOADED PORTS: (+ YES / - NOT) from File: $TODO"
-    for PORT in $(cat $REQUIRE)
+    for PORT in $(cat $TODO)
     do
         PORT_CLEANED=${PORT//[$'\t\r\n']}
         RESULT=$(docker exec -u 0 $CONTAINER bash -c "netstat -tulnp | grep $PORT_CLEANED")        
@@ -17,7 +17,7 @@ function activePortsOnContainer() {
             echo -e "\e[31m-$CONTAINER:$PORT_CLEANED"
          else
             echo "$CONTAINER:$PORT_CLEANED" >> $DONE
-            echo -e "\e[32m+SCONTAINER:$PORT_CLEANED"
+            echo -e "\e[32m+$CONTAINER:$PORT_CLEANED"
         fi
     done
     echo -e "\e[39m"

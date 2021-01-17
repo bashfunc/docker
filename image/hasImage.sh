@@ -1,0 +1,1 @@
+docker images | grep $1
